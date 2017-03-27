@@ -5,7 +5,7 @@ folder("${app}") {
 }
 
 job("${app}/BuildGradle") {
-    description "coba beljar jenkins"
+    description "coba belajar jenkins"
     logRotator {
         daysToKeep(7)
         numToKeep(10)
@@ -14,7 +14,6 @@ scm {
 	git {
 		remote {
 		    url('https://github.com/m4ri01/jenkins-jobs.git')
-		    credentials('-none')
 	}
 	branch ('master')
 
