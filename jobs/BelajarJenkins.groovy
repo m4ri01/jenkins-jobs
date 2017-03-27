@@ -5,22 +5,39 @@ folder("${app}") {
 }
 
 job("${app}/BuildGradle") {
-    description "Coba build gradle"
+    description "coba beljar jenkins"
     logRotator {
         daysToKeep(7)
         numToKeep(10)
     }
+scm {
+	git {
+		remote {
+		    url('https://github.com/m4ri01/jenkins-jobs.git')
+		    credentials('-none')
+	}
+	branch ('master')
+
+    }
+}
+
+
     triggers {
         scm('H/2 * * * *')
     } 
 
     steps {
-        gradle {
-            tasks('clean test')
-        }
+        shell('''npm install
+	npm run build
+	tar -cvf dist.tar.gz dist
+	''')
     }
+	
+	publishers {
+	    archiveArtifacts {
+		pattern("dist.tar.gz")
+		onlyIfSuccessful()
+		}
 
-    publishers {
-        mailer('mail@example.com', false, true)
-    }
+	}
 }
