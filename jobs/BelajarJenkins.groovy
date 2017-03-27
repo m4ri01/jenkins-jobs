@@ -27,8 +27,8 @@ scm {
 
     steps {
         shell('''npm install
-	npm run build
-	tar -cvf dist.tar.gz dist
+npm run build
+tar -cvf dist.tar.gz dist
 	''')
     }
 	
